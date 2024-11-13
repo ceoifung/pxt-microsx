@@ -911,3 +911,437 @@ namespace XRbit_小车 {
 /*****************************************************************************************************************************************
  *  四足狗类 ***************************************************************************************************************************** 
  ****************************************************************************************************************************************/
+
+
+//% weight=5 color=#22FFAA icon="\uf1b9"
+namespace XRbit_DOG {
+    let xrStrip: neopixel.Strip;
+
+    const movements_json = {
+        ACTION_STOP: "FF37000000000000000000000000FF",
+        ACTION_FORWARD: "FF37010000000000000000000000FF",
+        ACTION_BACKWARD: "FF37020000000000000000000000FF",
+        ACTION_TURN_LEFT: "FF37030000000000000000000000FF",
+        ACTION_TURN_RIGHT: "FF37040000000000000000000000FF",
+        ACTION_SHIFT_LEFT: "FF37050000000000000000000000FF",
+        ACTION_SHIFT_RIGHT: "FF37060000000000000000000000FF",
+        ACTION_LOOK_DOWN: "FF37080000000000000000000000FF",
+        ACTION_LOOK_UP: "FF37070000000000000000000000FF",
+        ACTION_TILT_LEFT: "FF37090000000000000000000000FF",
+        ACTION_TILT_RIGHT: "FF370a0000000000000000000000FF",
+        ACTION_STEPPING: "FF370b0000000000000000000000FF",
+
+        ACTION_HELLO: "FF42010000000000000000000000FF",
+        ACTION_BYE: "FF42020000000000000000000000FF",
+        ACTION_DEFENCE: "FF42030000000000000000000000FF",
+        ACTION_CAT: "FF42040000000000000000000000FF",
+        ACTION_SURRENDER: "FF42050000000000000000000000FF",
+        ACTION_PROVOCATION: "FF42060000000000000000000000FF",
+        ACTION_STRETCH: "FF42070000000000000000000000FF",
+        ACTION_PISSING: "FF42080000000000000000000000FF",
+        ACTION_JUMP: "FF42090000000000000000000000FF",
+        ACTION_PLAY_DEAD: "FF420a0000000000000000000000FF",
+
+        // ACTION_TEMPLATE: "FF420b0000000000000000000000FF",
+        GAIT_PACE: "FF45000000000000000000000000FF",
+        GAIT_WALK: "FF45010000000000000000000000FF",
+        GAIT_TROT: "FF45020000000000000000000000FF",
+        GAIT_HOP: "FF45030000000000000000000000FF",
+        GAIT_CLIMB: "FF45040000000000000000000000FF"
+    }
+
+    const LEG_INDEX = {
+        LEFT_FRONT_LEG: 0,
+        RIGHT_FRONT_LEG: 3,
+        LEFT_REAR_LEG: 6,
+        RIGHT_REAR_LEG: 9,
+    }
+
+    const JOINT_INDEX = {
+        BODY_JOINT: 1,
+        MIDDLE_JOINT: 2,
+        FOOT_JOINT: 3,
+    }
+
+
+
+    export enum enDogmovement {
+        //% blockId="ACTION_STOP" block="ACTION_STOP"
+        ACTION_STOP,
+        //% blockId="ACTION_FORWARD" block="ACTION_FORWARD"
+        ACTION_FORWARD,
+        //% blockId="ACTION_BACKWARD" block="ACTION_BACKWARD"
+        ACTION_BACKWARD,
+        //% blockId="ACTION_TURN_LEFT" block="ACTION_TURN_LEFT"
+        ACTION_TURN_LEFT,
+        //% blockId="ACTION_TURN_RIGHT" block="ACTION_TURN_RIGHT"
+        ACTION_TURN_RIGHT,
+        //% blockId="ACTION_SHIFT_LEFT" block="ACTION_SHIFT_LEFT"
+        ACTION_SHIFT_LEFT,
+        //% blockId="ACTION_SHIFT_RIGHT" block="ACTION_SHIFT_RIGHT"
+        ACTION_SHIFT_RIGHT,
+        //% blockId="ACTION_LOOK_DOWN" block="ACTION_LOOK_DOWN"
+        ACTION_LOOK_DOWN,
+        //% blockId="ACTION_LOOK_UP" block="ACTION_LOOK_UP"
+        ACTION_LOOK_UP,
+        //% blockId="ACTION_TILT_LEFT" block="ACTION_TILT_LEFT"
+        ACTION_TILT_LEFT,
+        //% blockId="ACTION_TILT_RIGHT" block="ACTION_TILT_RIGHT"
+        ACTION_TILT_RIGHT,
+        //% blockId="ACTION_STEPPING" block="ACTION_STEPPING"
+        ACTION_STEPPING
+    }
+
+    export enum enDogactions {
+        //% blockId="ACTION_HELLO" block="ACTION_HELLO"
+        ACTION_HELLO,
+        //% blockId="ACTION_BYE" block="ACTION_BYE"
+        ACTION_BYE,
+        //% blockId="ACTION_DEFENCE" block="ACTION_DEFENCE"
+        ACTION_DEFENCE,
+        //% blockId="ACTION_CAT" block="ACTION_CAT"
+        ACTION_CAT,
+        //% blockId="ACTION_SURRENDER" block="ACTION_SURRENDER"
+        ACTION_SURRENDER,
+        //% blockId="ACTION_PROVOCATION" block="ACTION_PROVOCATION"
+        ACTION_PROVOCATION,
+        //% blockId="ACTION_STRETCH" block="ACTION_STRETCH"
+        ACTION_STRETCH,
+        //% blockId="ACTION_PISSING" block="ACTION_PISSING"
+        ACTION_PISSING,
+        //% blockId="ACTION_JUMP" block="ACTION_JUMP"
+        ACTION_JUMP,
+        //% blockId="ACTION_PLAY_DEAD" block="ACTION_PLAY_DEAD"
+        ACTION_PLAY_DEAD
+    }
+
+    export enum enDogWalkGait {
+        //% blockId="GAIT_PACE" block="GAIT_PACE"
+        GAIT_PACE,
+        //% blockId="GAIT_WALK" block="GAIT_WALK"
+        GAIT_WALK,
+        //% blockId="GAIT_TROT" block="GAIT_TROT"
+        GAIT_TROT,
+        //% blockId="GAIT_HOP" block="GAIT_HOP"
+        GAIT_HOP,
+        //% blockId="GAIT_CLIMB" block="GAIT_CLIMB"
+        GAIT_CLIMB
+    }
+
+    export enum enDogLed {
+        //% blockId="ACTION_TURN_ON" block="ACTION_TURN_ON"
+        ACTION_TURN_ON,
+        //% blockId="ACTION_TURN_OFF" block="ACTION_TURN_OFF"
+        ACTION_TURN_OFF
+    }
+
+    export enum leg_options {
+        //% blockId="LEFT_FRONT_LEG" block="LEFT_FRONT_LEG"
+        LEFT_FRONT_LEG,
+        //% blockId="RIGHT_FRONT_LEG" block="RIGHT_FRONT_LEG"
+        RIGHT_FRONT_LEG,
+        //% blockId="LEFT_REAR_LEG" block="LEFT_REAR_LEG"
+        LEFT_REAR_LEG,
+        //% blockId="RIGHT_REAR_LEG" block="RIGHT_REAR_LEG"
+        RIGHT_REAR_LEG
+    }
+
+    export enum joint_options {
+        //% blockId="BODY_JOINT" block="BODY_JOINT"
+        BODY_JOINT,
+        //% blockId="MIDDLE_JOINT" block="MIDDLE_JOINT"
+        MIDDLE_JOINT,
+        //% blockId="FOOT_JOINT" block="FOOT_JOINT"
+        FOOT_JOINT
+    }
+
+
+
+    //% blockId=XRBIT_UartInit block="UartInit"
+    //% weight=94
+    //% blockGap=10
+    //% color="#22FFAA"
+    export function UartInit(): void {
+        serial.redirect(
+            SerialPin.P13,
+            SerialPin.P14,
+            BaudRate.BaudRate115200
+        )
+    }
+
+    //% blockId=XRBIT_corgi_movement block="corgi_movement|movement %movement"
+    //% weight=94
+    //% blockGap=10
+    //% color="#22FFAA"
+    export function corgi_movement(action: enDogmovement): void {
+        switch (action) {
+            case enDogmovement.ACTION_STOP:
+                const d = movements_json.ACTION_STOP;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_FORWARD:
+                const d = movements_json.ACTION_FORWARD;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_BACKWARD:
+                const d = movements_json.ACTION_BACKWARD;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_TURN_LEFT:
+                const d = movements_json.ACTION_TURN_LEFT;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_TURN_RIGHT:
+                const d = movements_json.ACTION_TURN_RIGHT;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_SHIFT_LEFT:
+                const d = movements_json.ACTION_SHIFT_LEFT;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_SHIFT_RIGHT:
+                const d = movements_json.ACTION_SHIFT_RIGHT;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_LOOK_DOWN:
+                const d = movements_json.ACTION_LOOK_DOWN;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_LOOK_UP:
+                const d = movements_json.ACTION_LOOK_UP;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_TILT_LEFT:
+                const d = movements_json.ACTION_TILT_LEFT;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_TILT_RIGHT:
+                const d = movements_json.ACTION_TILT_RIGHT;
+                serial.writeLine(d);
+                break;
+            case enDogmovement.ACTION_STEPPING:
+                const d = movements_json.ACTION_STEPPING;
+                serial.writeLine(d);
+                break;
+        }
+    }
+
+    //% blockId=XRBIT_corgi_movement_ms block="corgi_movement_ms|movement %movement|%time"
+    //% weight=94
+    //% blockGap=10
+    //% color="#22FFAA"
+    export function corgi_movement_ms(action: enDogmovement, time: time_data): void {
+        switch (action) {
+            case enDogmovement.ACTION_STOP:
+                const d = movements_json.ACTION_STOP;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_FORWARD:
+                const d = movements_json.ACTION_FORWARD;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_BACKWARD:
+                const d = movements_json.ACTION_BACKWARD;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_TURN_LEFT:
+                const d = movements_json.ACTION_TURN_LEFT;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_TURN_RIGHT:
+                const d = movements_json.ACTION_TURN_RIGHT;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_SHIFT_LEFT:
+                const d = movements_json.ACTION_SHIFT_LEFT;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_SHIFT_RIGHT:
+                const d = movements_json.ACTION_SHIFT_RIGHT;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_LOOK_DOWN:
+                const d = movements_json.ACTION_LOOK_DOWN;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_LOOK_UP:
+                const d = movements_json.ACTION_LOOK_UP;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_TILT_LEFT:
+                const d = movements_json.ACTION_TILT_LEFT;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_TILT_RIGHT:
+                const d = movements_json.ACTION_TILT_RIGHT;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+            case enDogmovement.ACTION_STEPPING:
+                const d = movements_json.ACTION_STEPPING;
+                serial.writeLine(d);
+                basic.pause(time);
+                serial.writeLine(movements_json.ACTION_STOP);
+                break;
+        }
+    }
+
+    //% blockId=XRBIT_corgi_actions block="corgi_actions|action %action"
+    //% weight=94
+    //% blockGap=10
+    //% color="#22FFAA"
+    export function corgi_actions(action: enDogactions): void {
+        switch (action) {
+            case enDogactions.ACTION_HELLO:
+                const d = movements_json.ACTION_HELLO;
+                serial.writeLine(d);
+                break;
+            case enDogactions.ACTION_BYE:
+                const d = movements_json.ACTION_BYE;
+                serial.writeLine(d);
+                break;
+            case enDogactions.ACTION_DEFENCE:
+                const d = movements_json.ACTION_DEFENCE;
+                serial.writeLine(d);
+                break;
+            case enDogactions.ACTION_CAT:
+                const d = movements_json.ACTION_CAT;
+                serial.writeLine(d);
+                break;
+            case enDogactions.ACTION_SURRENDER:
+                const d = movements_json.ACTION_SURRENDER;
+                serial.writeLine(d);
+                break;
+            case enDogactions.ACTION_PROVOCATION:
+                const d = movements_json.ACTION_PROVOCATION;
+                serial.writeLine(d);
+                break;
+            case enDogactions.ACTION_STRETCH:
+                const d = movements_json.ACTION_STRETCH;
+                serial.writeLine(d);
+                break;
+            case enDogactions.ACTION_PISSING:
+                const d = movements_json.ACTION_PISSING;
+                serial.writeLine(d);
+                break;
+            case enDogactions.ACTION_JUMP:
+                const d = movements_json.ACTION_JUMP;
+                serial.writeLine(d);
+                break;
+            case enDogactions.ACTION_PLAY_DEAD:
+                const d = movements_json.ACTION_PLAY_DEAD;
+                serial.writeLine(d);
+                break;
+        }
+    }
+
+    //% blockId=XRBIT_corgi_walk_gait block="corgi_walk_gait|action %action"
+    //% weight=94
+    //% blockGap=10
+    //% color="#22FFAA"
+    export function corgi_walk_gait(action: enDogWalkGait): void {
+        switch (action) {
+            case enDogWalkGait.GAIT_PACE:
+                const d = movements_json.GAIT_PACE;
+                serial.writeLine(d);
+                break;
+            case enDogWalkGait.GAIT_WALK:
+                const d = movements_json.GAIT_WALK;
+                serial.writeLine(d);
+                break;
+            case enDogWalkGait.GAIT_TROT:
+                const d = movements_json.GAIT_TROT;
+                serial.writeLine(d);
+                break;
+            case enDogWalkGait.GAIT_HOP:
+                const d = movements_json.GAIT_HOP;
+                serial.writeLine(d);
+                break;
+            case enDogWalkGait.GAIT_CLIMB:
+                const d = movements_json.GAIT_CLIMB;
+                serial.writeLine(d);
+                break;
+        }
+    }
+
+    //% blockId=corgi_led_control block="corgi_led_control|action %action"
+    //% weight=94
+    //% blockGap=10
+    //% color="#22FFAA"
+    export function corgi_led_control(action: enDogLed): void {
+        switch (action) {
+            case enDogLed.ACTION_TURN_OFF:
+                pins.digitalWritePin(DigitalPin.P12, 0);
+                break;
+            case enDogLed.ACTION_TURN_ON:
+                pins.digitalWritePin(DigitalPin.P12, 1);
+                break;
+        }
+    }
+
+    //% blockId=corgi_forward_kinematics block="corgi_forward_kinematics|leg %leg|joint %joint angle %angle"
+    //% weight=94
+    //% blockGap=10
+    //% color="#22FFAA"
+    export function corgi_forward_kinematics(leg: leg_options, joint: joint_options, angle): void {
+        const ACTION_TEMPLATE = [0xFF, 0x42, 0x0a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF];
+
+        if (parseInt(angle) > 180) {
+            angle = 180
+        }
+        var leg_num = 0;
+        var joint_num = 0;
+        switch (leg) {
+            case leg_options.LEFT_FRONT_LEG:
+                leg_num = LEG_INDEX.LEFT_FRONT_LEG;
+                break;
+            case leg_options.RIGHT_FRONT_LEG:
+                leg_num = LEG_INDEX.RIGHT_FRONT_LEG;
+                break;
+            case leg_options.LEFT_REAR_LEG:
+                leg_num = LEG_INDEX.LEFT_REAR_LEG;
+                break;
+            case leg_options.RIGHT_REAR_LEG:
+                leg_num = LEG_INDEX.RIGHT_REAR_LEG;
+                break;
+        }
+        switch (joint) {
+            case joint_options.BODY_JOINT:
+                joint_num = JOINT_INDEX.BODY_JOINT;
+                break;
+            case joint_options.MIDDLE_JOINT:
+                joint_num = JOINT_INDEX.MIDDLE_JOINT;
+                break;
+            case joint_options.FOOT_JOINT:
+                joint_num = JOINT_INDEX.FOOT_JOINT;
+                break;
+        }
+
+        ACTION_TEMPLATE[1] = 0x41;
+        ACTION_TEMPLATE[2] = (parseInt(leg_num) + parseInt(joint_num));
+        ACTION_TEMPLATE[3] = angle;
+
+        serial.writeLine(ACTION_TEMPLATE);
+    }
+}

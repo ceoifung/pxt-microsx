@@ -16,12 +16,65 @@
   "XRbit_传感器.Ultrasonic|block": "超声波|Trig引脚 %Trig|Echo引脚 %Echo",
 
   "XRbit_小车.RGB_Car_Program|block": "小车彩灯",
-  "XRbit_小车.enMotor.leftMotor|block": "左侧电机",
+  "XRbit_小车.enMotor.SetMotor|block": "左侧电机",
   "XRbit_小车.enMotor.rightMotor|block": "右侧电机",
   "XRbit_小车.irremote_on_pressed|block": "红外遥控器按钮|%IRValue|被按下",
   "XRbit_小车.SetMotor|block": "设置电机|%Motor|速度为 %Speed",
   "XRbit_小车.SetServoAngle|block": "设置舵机|编号 %Num|角度 %Angle",
   "XRbit_小车.SaveServoAngle|block": "保存当前角度为默认值",
   "XRbit_小车.ReSetServoAngle|block": "恢复所有角度为默认值",
-  "XRbit_传感器.ReadDht11|block": "读取DHT11数据|单位 %dht11type|引脚 %dht11pin"
+  "XRbit_传感器.ReadDht11|block": "读取DHT11数据|单位 %dht11type|引脚 %dht11pin",
+
+  "XRbit_DOG.UartInit|block": "初始化",
+  "XRbit_DOG.corgi_movement|block": "控制机器狗|%movement",
+  "XRbit_DOG.corgi_movement_ms|block": "控制机器狗|%movement|时长(ms) %time",
+  "XRbit_DOG.corgi_actions|block": "机器狗做动作|%action",
+  "XRbit_DOG.corgi_walk_gait|block": "切换机器狗步态为|%action|(默认:Pace步态)",
+  "XRbit_DOG.corgi_led_control|block": "%action|灯光",
+  "XRbit_DOG.corgi_forward_kinematics|block": "控制机器狗|%leg 的|%joint 的舵机角度为|%angle",
+
+  "XRbit_DOG.enDogmovement.ACTION_STOP|block": "停止",
+  "XRbit_DOG.enDogmovement.ACTION_FORWARD|block": "前进",
+  "XRbit_DOG.enDogmovement.ACTION_BACKWARD|block": "后退",
+  "XRbit_DOG.enDogmovement.ACTION_TURN_LEFT|block": "左转",
+  "XRbit_DOG.enDogmovement.ACTION_TURN_RIGHT|block": "右转",
+  "XRbit_DOG.enDogmovement.ACTION_SHIFT_LEFT|block": "左平移",
+  "XRbit_DOG.enDogmovement.ACTION_SHIFT_RIGHT|block": "右平移",
+  "XRbit_DOG.enDogmovement.ACTION_LOOK_DOWN|block": "低头",
+  "XRbit_DOG.enDogmovement.ACTION_LOOK_UP|block": "抬头",
+  "XRbit_DOG.enDogmovement.ACTION_TILT_LEFT|block": "左倾斜",
+  "XRbit_DOG.enDogmovement.ACTION_TILT_RIGHT|block": "右倾斜",
+  "XRbit_DOG.enDogmovement.ACTION_STEPPING|block": "前后原地踏步",
+
+  "XRbit_DOG.enDogactions.ACTION_HELLO|block": "打招呼(10s)",
+  "XRbit_DOG.enDogactions.ACTION_BYE|block": "说再见(9s)",
+  "XRbit_DOG.enDogactions.ACTION_DEFENCE|block": "防御(9s)",
+  "XRbit_DOG.enDogactions.ACTION_CAT|block": "招财猫(17s)",
+  "XRbit_DOG.enDogactions.ACTION_SURRENDER|block": "投降(10s)",
+  "XRbit_DOG.enDogactions.ACTION_PROVOCATION|block": "挑衅(10s)",
+  "XRbit_DOG.enDogactions.ACTION_STRETCH|block": "伸懒腰(13s)",
+  "XRbit_DOG.enDogactions.ACTION_PISSING|block": "撒尿(9s)",
+  "XRbit_DOG.enDogactions.ACTION_JUMP|block": "跳跃(8s)",
+  "XRbit_DOG.enDogactions.ACTION_PLAY_DEAD|block": "装死(14s)",
+
+  "XRbit_DOG.enDogWalkGait.GAIT_PACE|block": "Pace步态",
+  "XRbit_DOG.enDogWalkGait.GAIT_WALK|block": "Walk步态",
+  "XRbit_DOG.enDogWalkGait.GAIT_TROT|block": "Trot步态",
+  "XRbit_DOG.enDogWalkGait.GAIT_HOP|block": "Hop步态",
+  "XRbit_DOG.enDogWalkGait.GAIT_CLIMB|block": "爬台阶",
+
+  "XRbit_DOG.leg_options.LEFT_FRONT_LEG|block": "左前腿",
+  "XRbit_DOG.leg_options.RIGHT_FRONT_LEG|block": "右前腿",
+  "XRbit_DOG.leg_options.LEFT_REAR_LEG|block": "左后腿",
+  "XRbit_DOG.leg_options.RIGHT_REAR_LEG|block": "右后腿",
+
+  "XRbit_DOG.joint_options.BODY_JOINT|block": "身体关节",
+  "XRbit_DOG.joint_options.MIDDLE_JOINT|block": "中间关节",
+  "XRbit_DOG.joint_options.FOOT_JOINT|block": "足尖关节",
+  
+  "XRbit_DOG.enDogLed.ACTION_TURN_ON|block": "打开",
+  "XRbit_DOG.enDogLed.ACTION_TURN_OFF|block": "关闭"
+
+
+
 }
