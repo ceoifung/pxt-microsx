@@ -1301,11 +1301,10 @@ namespace XRbit_DOG {
         }
 
         ACTION_TEMPLATE[1] = 0x41;
-        ACTION_TEMPLATE[2] = (leg_num) + (joint_num);
+        ACTION_TEMPLATE[2] = (leg_num ) + (joint_num);
         ACTION_TEMPLATE[3] = angle;
 
-        const buffer = Buffer.NumberFormat(ACTION_TEMPLATE);
-
-        serial.writeBuffer(buffer);
+        
+        serial.writeBuffer(Buffer.fromArray(ACTION_TEMPLATE))
     }
 }
