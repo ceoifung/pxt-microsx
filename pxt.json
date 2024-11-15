@@ -8,7 +8,7 @@
     "files": [
         "README.md",
         "XRBIT.ts",
-        "_locales/zhXRbit_DOG-strings.json"
+        "_locales/zh/XRbit_DOG-strings.json"
     ],
     "testFiles": [
         "test.ts"
