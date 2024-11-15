@@ -1082,7 +1082,7 @@ namespace XRbit_DOG {
                 serial.writeBuffer(Buffer.fromHex(movements_json.ACTION_FORWARD));
                 break;
             case enDogmovement.ACTION_BACKWARD:
-                serial.writeBuffer(Buffer.fromHex(movements_json.GAIACTION_BACKWARDT_PACE));
+                serial.writeBuffer(Buffer.fromHex(movements_json.ACTION_BACKWARD));
                 break;
             case enDogmovement.ACTION_TURN_LEFT:
                 serial.writeBuffer(Buffer.fromHex(movements_json.ACTION_TURN_LEFT));
@@ -1269,7 +1269,7 @@ namespace XRbit_DOG {
     export function corgi_forward_kinematics(leg: leg_options, joint: joint_options, angle: number): void {
         const ACTION_TEMPLATE = [0xFF, 0x42, 0x0a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF];
 
-        if (parseInt(angle) > 180) {
+        if (angle > 180) {
             angle = 180
         }
         var leg_num = 0;
@@ -1301,7 +1301,7 @@ namespace XRbit_DOG {
         }
 
         ACTION_TEMPLATE[1] = 0x41;
-        ACTION_TEMPLATE[2] = (parseInt(leg_num) + parseInt(joint_num));
+        ACTION_TEMPLATE[2] = (leg_num) + (joint_num);
         ACTION_TEMPLATE[3] = angle;
 
         serial.writeBuffer(Buffer.fromHex(ACTION_TEMPLATE));
