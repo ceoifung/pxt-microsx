@@ -155,7 +155,7 @@ namespace XRbit_DOG {
 
 
 
-    //% blockId=XRbit_DOG_UartInit block="UartInit"
+    //% blockId=UartInit block="UartInit"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
@@ -167,7 +167,7 @@ namespace XRbit_DOG {
         )
     }
 
-    //% blockId=XRbit_DOG_corgi_movement block="corgi_movement|movement %movement"
+    //% blockId=corgi_movement block="corgi_movement|movement %movement"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
@@ -212,7 +212,7 @@ namespace XRbit_DOG {
         }
     }
 
-    //% blockId=XRbit_DOG_corgi_movement_ms block="corgi_movement_ms|movement %movement|%time"
+    //% blockId=corgi_movement_ms block="corgi_movement_ms|movement %movement|%time"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
@@ -281,7 +281,7 @@ namespace XRbit_DOG {
         }
     }
 
-    //% blockId=XRbit_DOG_corgi_actions block="corgi_actions|action %action"
+    //% blockId=corgi_actions block="corgi_actions|action %action"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
@@ -321,7 +321,7 @@ namespace XRbit_DOG {
         }
     }
 
-    //% blockId=XRbit_DOG_corgi_walk_gait block="corgi_walk_gait|action %action"
+    //% blockId=corgi_walk_gait block="corgi_walk_gait|action %action"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
@@ -345,7 +345,7 @@ namespace XRbit_DOG {
         }
     }
 
-    //% blockId=XRbit_DOG_corgi_led_control block="corgi_led_control|action %action"
+    //% blockId=corgi_led_control block="corgi_led_control|action %action"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
@@ -360,7 +360,7 @@ namespace XRbit_DOG {
         }
     }
 
-    //% blockId=XRbit_DOG_corgi_forward_kinematics block="corgi_forward_kinematics|leg %leg|joint %joint angle %angle"
+    //% blockId=corgi_forward_kinematics block="corgi_forward_kinematics|leg %leg|joint %joint angle %angle"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
