@@ -345,7 +345,7 @@ namespace XRbit_DOG {
         }
     }
 
-    //% blockId=corgi_led_control block="corgi_led_control|action %action"
+    //% blockId=XRbit_DOG_corgi_led_control block="corgi_led_control|action %action"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
@@ -360,18 +360,15 @@ namespace XRbit_DOG {
         }
     }
 
-    //% blockId=corgi_forward_kinematics block="corgi_forward_kinematics|leg %leg|joint %joint angle %angle"
+    //% blockId=XRbit_DOG_corgi_forward_kinematics block="corgi_forward_kinematics|leg %leg|joint %joint angle %angle"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
+    //% angle.min=0 angle.max=180
     export function corgi_forward_kinematics(leg: leg_options, joint: joint_options, angle: number): void {
         const ACTION_TEMPLATE = [0xFF, 0x42, 0x0a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF];
-
-        if (angle > 180) {
-            angle = 180
-        }
-        var leg_num = 0;
-        var joint_num = 0;
+        let leg_num = 0;
+        let joint_num = 0;
         switch (leg) {
             case leg_options.LEFT_FRONT_LEG:
                 leg_num = LEG_INDEX.LEFT_FRONT_LEG;
