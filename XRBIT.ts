@@ -914,7 +914,6 @@ namespace XRbit_小车 {
 
 //% weight=5 color=#B53F32 icon="\uf1b9"
 namespace XRbit_DOG {
-
     const movements_json = {
         ACTION_STOP: "FF37000000000000000000000000FF",
         ACTION_FORWARD: "FF37010000000000000000000000FF",
@@ -1260,7 +1259,7 @@ namespace XRbit_DOG {
         }
     }
 
-    //% blockId=corgi_forward_kinematics block="corgi_forward_kinematics|leg %leg|joint %joint angle %angle"
+    //% blockId=corgi_forward_kinematics block="corgi_forward_kinematics|leg %leg|joint %joint |angle %angle"
     //% weight=94
     //% blockGap=10
     //% color="#B53F32"
@@ -1295,11 +1294,11 @@ namespace XRbit_DOG {
                 break;
         }
 
-        ACTION_TEMPLATE[1] = 0x41;
-        ACTION_TEMPLATE[2] = (leg_num ) + (joint_num);
-        ACTION_TEMPLATE[3] = angle;
+        // ACTION_TEMPLATE[1] = 0x41;
+        // ACTION_TEMPLATE[2] = (leg_num ) + (joint_num);
+        // ACTION_TEMPLATE[3] = angle;
 
 
-        serial.writeBuffer(Buffer.fromArray(ACTION_TEMPLATE))
+        // serial.writeBuffer(Buffer.fromArray(ACTION_TEMPLATE))
     }
 }
