@@ -1,14 +1,14 @@
 {
-    "name": "XRbit_DOG",
+    "name": "XRBIT-DS",
     "version": "1.0.1",
-    "description": "XRbit_DOG DRIVER BOARD FOR MICROBIT",
+    "description": "XRBIT DRIVER BOARD FOR MICROBIT",
     "dependencies": {
         "core": "*"
     },
     "files": [
         "README.md",
         "XRBIT.ts",
-        "_locales/zh-cn/XRBIT-DS-strings.json",
+        "_locales/zh/XRBIT-DS-strings.json"
     ],
     "testFiles": [
         "test.ts"
