@@ -913,7 +913,7 @@
  ****************************************************************************************************************************************/
 
 
-//% weight=5 color=#22FFAA icon="\uf1b9"
+//% weight=5 color=#B53F32 icon="\uf1b9"
 namespace XRbit_DOG {
     // let xrStrip: neopixel.Strip;
 
@@ -1060,7 +1060,7 @@ namespace XRbit_DOG {
     //% blockId=XRBIT_UartInit block="UartInit"
     //% weight=94
     //% blockGap=10
-    //% color="#22FFAA"
+    //% color="#B53F32"
     export function UartInit(): void {
         serial.redirect(
             SerialPin.P13,
@@ -1072,7 +1072,7 @@ namespace XRbit_DOG {
     //% blockId=XRBIT_corgi_movement block="corgi_movement|movement %movement"
     //% weight=94
     //% blockGap=10
-    //% color="#22FFAA"
+    //% color="#B53F32"
     export function corgi_movement(action: enDogmovement): void {
         switch (action) {
             case enDogmovement.ACTION_STOP:
@@ -1117,7 +1117,7 @@ namespace XRbit_DOG {
     //% blockId=XRBIT_corgi_movement_ms block="corgi_movement_ms|movement %movement|%time"
     //% weight=94
     //% blockGap=10
-    //% color="#22FFAA"
+    //% color="#B53F32"
     export function corgi_movement_ms(action: enDogmovement, time: number): void {
         switch (action) {
             case enDogmovement.ACTION_STOP:
@@ -1186,7 +1186,7 @@ namespace XRbit_DOG {
     //% blockId=XRBIT_corgi_actions block="corgi_actions|action %action"
     //% weight=94
     //% blockGap=10
-    //% color="#22FFAA"
+    //% color="#B53F32"
     export function corgi_actions(action: enDogactions): void {
         switch (action) {
             case enDogactions.ACTION_HELLO:
@@ -1226,7 +1226,7 @@ namespace XRbit_DOG {
     //% blockId=XRBIT_corgi_walk_gait block="corgi_walk_gait|action %action"
     //% weight=94
     //% blockGap=10
-    //% color="#22FFAA"
+    //% color="#B53F32"
     export function corgi_walk_gait(action: enDogWalkGait): void {
         switch (action) {
             case enDogWalkGait.GAIT_PACE:
@@ -1250,7 +1250,7 @@ namespace XRbit_DOG {
     //% blockId=corgi_led_control block="corgi_led_control|action %action"
     //% weight=94
     //% blockGap=10
-    //% color="#22FFAA"
+    //% color="#B53F32"
     export function corgi_led_control(action: enDogLed): void {
         switch (action) {
             case enDogLed.ACTION_TURN_OFF:
@@ -1265,7 +1265,7 @@ namespace XRbit_DOG {
     //% blockId=corgi_forward_kinematics block="corgi_forward_kinematics|leg %leg|joint %joint angle %angle"
     //% weight=94
     //% blockGap=10
-    //% color="#22FFAA"
+    //% color="#B53F32"
     export function corgi_forward_kinematics(leg: leg_options, joint: joint_options, angle: number): void {
         const ACTION_TEMPLATE = [0xFF, 0x42, 0x0a, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF];
 
@@ -1304,6 +1304,8 @@ namespace XRbit_DOG {
         ACTION_TEMPLATE[2] = (leg_num) + (joint_num);
         ACTION_TEMPLATE[3] = angle;
 
-        serial.writeBuffer(Buffer.fromHex(ACTION_TEMPLATE));
+        const buffer = Buffer.from(ACTION_TEMPLATE);
+
+        serial.writeBuffer(buffer);
     }
 }
